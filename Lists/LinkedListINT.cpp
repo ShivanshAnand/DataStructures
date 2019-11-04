@@ -35,7 +35,7 @@ class LinkedListINT { /*linked list for int values*/
                 } curr->next = temp;
             }
         }
- 
+
 
     public:
     /*removes all the elements of the list*/
@@ -71,7 +71,10 @@ class LinkedListINT { /*linked list for int values*/
                 if(curr==NULL) {
                     /*element not found, do appropriate thing*/
                 }
-                if(c==index) {
+                if(c==0) {
+                    head = curr->next;
+                }
+                else if(c==index) {
                     none = curr;
                     curr = curr->next;
                     trail->next = curr;
@@ -144,8 +147,11 @@ class LinkedListINT { /*linked list for int values*/
 
 int main() {
     /* do whatever you want to do with the list class, sample code belo*/
-    ListInt list;
+    LinkedListINT list;
     list.add(1);
+    list.add(2);
+    list.add(4);
+    list.remove(1);
     list.printList();
     cout << list.size();
     return 0;
