@@ -142,6 +142,35 @@ class LinkedListINT { /*linked list for int values*/
             }
             return NULL;
         }
+    
+    public:
+        void sort(bool descending) {
+            Node* last = NULL;
+            bool swapped;
+            do {
+                swapped = false;
+                curr = head;
+                while(curr->next!=last){
+                    if(descending){
+                        if(curr->data<curr->next->data) {
+                            int temp = curr->data;
+                            curr->data = curr->next->data;
+                            curr->next->data = temp;
+                            swapped = true;
+                        }
+                    } else {
+                        if(curr->data>curr->next->data) {
+                            int temp = curr->data;
+                            curr->data = curr->next->data;
+                            curr->next->data = temp;
+                            swapped = true;
+                        }
+                    }
+                    curr = curr->next;
+                }
+                last = curr;
+            } while(swapped);
+    }
 };
 
 
