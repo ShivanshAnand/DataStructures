@@ -1,7 +1,6 @@
-/* binary search tree */
+/* Binary Search Tree */
 #include <iostream>
 #include <queue>
-
 using namespace std;
 
 class BinaryTree {
@@ -133,5 +132,21 @@ class BinaryTree {
                 tlevel = q.front()->level;
                 q.pop();
             }
+        }
+
+    public:
+        int getMin() {
+            Node* temp = root;
+            while(temp->left!=NULL)
+                temp = temp->left;
+            return temp->data;
+        }
+
+    public:
+        int getMax() {
+            Node* temp = root;
+            while(temp->right!=NULL)
+                temp = temp->right;
+            return temp->data;
         }
 };
