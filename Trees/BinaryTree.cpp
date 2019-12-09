@@ -1,4 +1,3 @@
-/* Binary Search Tree */
 #include <iostream>
 #include <queue>
 using namespace std;
@@ -136,6 +135,8 @@ class BinaryTree {
 
     public:
         int getMin() {
+            if(root == NULL)
+                return -1;
             Node* temp = root;
             while(temp->left!=NULL)
                 temp = temp->left;
@@ -144,9 +145,44 @@ class BinaryTree {
 
     public:
         int getMax() {
+            if(root == NULL)
+                return -1;
             Node* temp = root;
             while(temp->right!=NULL)
                 temp = temp->right;
             return temp->data;
         }
+
+    public:
+        int contains(int data, Node* temp) {
+            if(temp == NULL) {
+                return -1;
+            } else {
+                if(temp->data == data) {
+                    return temp->data;
+                }
+
+                if(temp->left!=NULL && data < temp->data) {
+                    int d2 = contains(data, temp->left);
+                    if(d2 == data)
+                        return d2;
+                }
+
+                if(temp->right!=NULL && data > temp->data) {
+                   int d2 = contains(data, temp->right);
+                   if(d2 == data)
+                        return d2;
+                }
+            }
+            return -1;
+        }
+
+
+
+
+    public:
+        Node* getRoot() {
+            return root;
+        }
+
 };
