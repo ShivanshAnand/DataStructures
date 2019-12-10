@@ -1,3 +1,5 @@
+/* Binary Search Tree for integer values */
+
 #include <iostream>
 #include <queue>
 using namespace std;
@@ -92,6 +94,12 @@ class BinaryTree {
             }
         }
 
+    private:
+        bool hasChildren(Node* temp) {
+            if(temp->left!=NULL && temp->right!=NULL)
+                return true;
+            return false;
+        }
 
     /*this is constructor, all private member functions are above and public are below*/
 
@@ -134,24 +142,22 @@ class BinaryTree {
         }
 
     public:
-        int getMin() {
-            if(root == NULL)
-                return -1;
-            Node* temp = root;
+        Node* getMin(Node* temp) {
+            if(temp == NULL)
+                return NULL;
             while(temp->left!=NULL)
                 temp = temp->left;
-            return temp->data;
+            return temp;
         }
 
     public:
-        int getMax() {
+        Node* getMax(Node* temp) {
             if(root == NULL)
-                return -1;
-            Node* temp = root;
+                return NULL;
             while(temp->right!=NULL)
                 temp = temp->right;
-            return temp->data;
-        }
+            return temp;
+
 
     public:
         int contains(int data, Node* temp) {
@@ -175,6 +181,36 @@ class BinaryTree {
                 }
             }
             return -1;
+        }
+
+
+    public:
+        Node* removeData(int data, Node* temp) {
+            if(temp == NULL) {
+                cout << "No nodes in the tree ";
+                return NULL;
+            }
+
+            if(data < temp->data) {
+                temp->left = removeData(data, temp->left);
+            } else if(data > temp->data) {
+                temp->right = removeData(data, temp->right);
+            } else {
+                if(temp->left == NULL) {
+                    Node* t2 = temp->right;
+                    delete temp;
+                    return t2;
+                } else if(temp->right == NULL){
+                    Node* t2 = temp->left;
+                    delete temp;
+                    return t2;
+                } else {
+                    Node* t2 = getMin(temp->right);
+                    temp->data = t2->data;
+                    temp->right = removeData(t2->data, temp->right);
+                }
+            }
+            return temp;
         }
 
 
